@@ -1,0 +1,43 @@
+buildscript {
+
+    repositories {
+        maven {
+            url 'http://repo1.maven.org/maven2'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.4'
+    }
+}
+
+repositories {
+    maven {
+        url 'http://google-api-client-libraries.appspot.com/mavenrepo'
+    }
+
+    maven {
+        url 'http://repo1.maven.org/maven2'
+    }
+}
+
+apply plugin: 'android'
+
+
+dependencies {
+    // compile files('libs/android-support-v4.jar')
+    compile 'com.android.support:support-v4:13.0.0'
+    compile 'com.google.android.gms:play-services:3.1.36'
+    compile 'com.google.http-client:google-http-client-jackson2:1.13.1-beta'
+    compile 'com.google.apis:google-api-services-youtube:v3-rev24-1.13.2-beta'
+    compile 'com.google.oauth-client:google-oauth-client-jetty:1.13.1-beta'
+}
+
+android {
+    compileSdkVersion 17
+    buildToolsVersion "17"
+
+    defaultConfig {
+        minSdkVersion 8
+        targetSdkVersion 16
+    }
+}
