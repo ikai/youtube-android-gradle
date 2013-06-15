@@ -24,12 +24,42 @@ apply plugin: 'android'
 
 
 dependencies {
-    // compile files('libs/android-support-v4.jar')
-    compile 'com.android.support:support-v4:13.0.0'
-    compile 'com.google.android.gms:play-services:3.1.36'
-    compile 'com.google.http-client:google-http-client-jackson2:1.13.1-beta'
-    compile 'com.google.apis:google-api-services-youtube:v3-rev24-1.13.2-beta'
-    compile 'com.google.oauth-client:google-oauth-client-jetty:1.13.1-beta'
+    //compile files('libs/android-support-v4.jar')
+
+    // The following lines implement maven imports as defined at:
+    // https://code.google.com/p/google-api-java-client/wiki/Setup
+
+    // After installing Play services support via the Android SDK manager you can uncomment the line below.
+    // Uncommenting the line prior to installing the package prevents the project from importing.
+    compile (group: 'com.google.android.gms', name: 'play-services', version: '3.1.36')
+    
+    // Add the main Google API client library.
+    compile (group: 'com.google.api-client', name: 'google-api-client', version: '1.15.0-rc') {
+        // Exclude artifacts that the Android SDK provides.
+        exclude (group: 'xpp3', module: 'xpp3') //by both name and group
+        exclude (group: 'org.apache.httpcomponents', module: 'httpclient') //by both name and group
+        exclude (group: 'junit', module: 'junit') //by both name and group
+        exclude (group: 'com.google.android', module: 'android') //by both name and group
+    }
+    
+    // Add the Android extensions for the Google API client library.
+    compile (group: 'com.google.api-client', name: 'google-api-client-android', version: '1.15.0-rc') {
+        // Exclude play services. Explicitly include it above after you have installed Play services from the Android SDK manager.
+        exclude (group: 'com.google.android.google-play-services', module: 'google-play-services') //by both name and group
+    }
+
+    // The following client libraries make HTTP/JSON on Andriod easier.
+
+    // Add the Android extensions for Google HTTP client.
+    compile (group: 'com.google.http-client', name: 'google-http-client-android', version: '1.15.0-rc') {
+        exclude (group: 'com.google.android', module: 'android') //by both name and group
+    }
+
+    // This is used by the Google HTTP client library.
+    compile (group: 'com.google.guava', name: 'guava', version: '14.0.1')
+
+    // These are the service extensions to the Google API client library we are using.
+    compile (group: 'com.google.apis', name: 'google-api-services-youtube', version: 'v3-rev56-1.15.0-rc')
 }
 
 android {
