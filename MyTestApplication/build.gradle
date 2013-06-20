@@ -55,6 +55,9 @@ dependencies {
         exclude (group: 'com.google.android', module: 'android') //by both name and group
     }
 
+    // This adds JacksonFactory, which many of our code samples use as a parameter to the Google API Client for Java
+    compile (group: 'com.google.http-client', name: 'google-http-client-jackson2', version: '1.15.0-rc')
+
     // This is used by the Google HTTP client library.
     compile (group: 'com.google.guava', name: 'guava', version: '14.0.1')
 
